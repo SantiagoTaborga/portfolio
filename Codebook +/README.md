@@ -3,6 +3,7 @@ The Codebook project creates two key deliverables: `Codebook.pdf` and `codebook.
 
 The `codebook.csv` file consolidates indicators related to global development and infrastructure to organize them into one compiling dataset named "Trade Readiness".
 
+
 The `Codebook.pdf` file is the explanation for the variables within the Trade Readiness dataset. `Codebook.rmd` displays how this document was built.
 
 The data to achieve this project was retrieved from the following sources:
