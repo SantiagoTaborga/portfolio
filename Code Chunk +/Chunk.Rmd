@@ -1,0 +1,55 @@
+---
+title: "Chunk"
+author: "Santiago Taborga"
+date: '2025-05-01'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(lfe)
+library(modelsummary)
+library(gt)
+```
+
+```{r}
+df <- read.csv("sample.csv")
+
+# regression estimates
+models <- 
+  list(
+    "Masks" = felm(deaths.scaled ~ always.mask 
+                   + population + svi.index | state, data = df),
+    "Vaccination" = felm(deaths.scaled ~ vax.complete
+                         + population + svi.index | state, data = df),
+    "Masks and Vaccination" = felm(deaths.scaled ~ always.mask + vax.complete 
+                                   + svi.index | state, data = df)
+  )
+
+# regression table
+table <- modelsummary(
+  models, 
+  coef_order = c("always.mask", "vax.complete", "population", 
+                 "svi.indexB", "svi.indexC", "svi.indexD"),
+  coef_rename = c(
+    "always.mask" = "Mask Usage", 
+    "vax.complete" = "Vaccine Completion", 
+    "population" = "Population",
+    "svi.indexB" = "SVI - B",
+    "svi.indexC" = "SVI - C",
+    "svi.indexD" = "SVI - D"
+  ),
+  gof_map = c('nobs'),
+  output = 'gt',
+  star = TRUE
+)
+
+## add header above the table
+table %>%
+  tab_spanner(
+    label = "Number of deaths",
+    columns = c(`Masks`, `Vaccination`, `Masks and Vaccination`)
+  )
+```
