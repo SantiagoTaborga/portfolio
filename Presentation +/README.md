@@ -3,5 +3,4 @@ The Presentation is a study of racial profiling in the DMV area. Data from the V
 
 The presentation file is named `index.html`, and is available to view at https://santiagotaborga.github.io/portfolio/. The replication code is found in the `index.Rmd` file.
 
-All data to reproduce this project is available at the Open Policing Project's website at https://openpolicing.
-stanford.edu.
+All data to reproduce this project is available at the Open Policing Project's website at https://openpolicing.stanford.edu.
